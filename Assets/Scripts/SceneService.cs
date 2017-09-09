@@ -7,6 +7,7 @@ public class SceneService : MonoBehaviour {
 
 	public static SceneService instance;
 
+	//dont destroy this instance 
 	void Awake() {
 		if(instance == null)  {
 			instance = this;
@@ -16,6 +17,7 @@ public class SceneService : MonoBehaviour {
 		}
 	}
 
+	//loads scene and starts coroutine to fade to black
 	public void LoadScene(int sceneIndex){
 		StartCoroutine (LoadSceneRoutine (sceneIndex));
 	}
