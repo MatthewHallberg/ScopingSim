@@ -54,8 +54,9 @@
      <Compile Include="Assets\Scripts\BlackFadeBehavior.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\SceneService.cs" />
+     <Compile Include="Assets\Scripts\UIBehavior.cs" />
+     <None Include="Assets\Fonts\GUI3D Text Shader.shader" />
      <None Include="Assets\Doctor&apos;s office\Readme.txt" />
-     <None Include="Assets\Fonts\OpenSans\License!.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

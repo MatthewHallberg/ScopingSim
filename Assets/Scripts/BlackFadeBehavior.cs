@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Fades to black and back to transparent
+/// for a smooth transition between scenes
+/// </summary>
+
 public class BlackFadeBehavior : MonoBehaviour {
 
 	private static BlackFadeBehavior _instance;

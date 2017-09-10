@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls camera by moving a rigid body
+/// on the camera so that it will be affected
+/// by collisions on the walls of the lung model.
+/// </summary>
+
 public class CameraControl : MonoBehaviour {
 
 	public Rigidbody rb;
@@ -20,16 +26,15 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		//handle forward backward movementand strafing
 		float vertical = Input.GetAxis("Vertical") * 2f;
 		float horizontal = Input.GetAxis("Horizontal") * 4f;
 
 		if (vertical != 0 || horizontal != 0) {
-			rb.AddRelativeForce (Vector3.forward * vertical);
+			rb.AddRelativeForce (Vector3.forward * vertical);			
 			rb.AddRelativeForce (Vector3.right * horizontal);
-
 		} else {
 			rb.velocity = Vector3.zero;
 		}
@@ -41,8 +46,8 @@ public class CameraControl : MonoBehaviour {
 		rotY += mouseX * mouseSensitivity * Time.deltaTime;
 		rotX += mouseY * mouseSensitivity * Time.deltaTime;
 
-		//clamp rotation at 30 and 160 so we cant turn all the way around
-		rotX = Mathf.Clamp(rotX, 10, 180);
+		//rotX = Mathf.Clamp(rotX, -100, 100);
+		//rotY = Mathf.Clamp(rotY, -100, 100);
 
 		Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
 		transform.rotation = localRotation;
