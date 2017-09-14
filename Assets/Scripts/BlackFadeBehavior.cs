@@ -11,7 +11,6 @@ using UnityEngine.UI;
 public class BlackFadeBehavior : MonoBehaviour {
 
 	private static BlackFadeBehavior _instance;
-
 	public static BlackFadeBehavior Instance {
 		get {
 			return _instance;

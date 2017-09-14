@@ -1,6 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Level1Behavior.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Level1Behavior.cs" Line="51" Column="1" />
+      <File FileName="Assets/Scripts/LevelManager.cs" Line="34" Column="49" />
+      <File FileName="Assets/Scripts/CollisionControl.cs" Line="21" Column="42" />
+      <File FileName="Assets/Scripts/CameraControl.cs" Line="41" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
