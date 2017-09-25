@@ -15,29 +15,18 @@ public class Level1Behavior : MonoBehaviour {
 	[Header("Level 1")]
 	public GameObject textLargeObject;
 	public Text objectiveTextLarge, objectiveTextSmall;
-	public Transform PassagesParent;
+	public List<Transform> possiblePassages = new List<Transform> ();
+	private int numPassages = 2;
 	[HideInInspector]
 	public string desiredPassage;
 	[HideInInspector]
 	public List<string> Level1Passages = new List<string> ();
-	private List<string> possiblePassages = new List<string> ();
-	private int numPassages = 2;
 
 	void Awake(){
 		_instance = this;
 	}
 
 	public void Init(){
-
-		//add all possible passages to a list
-		foreach (Transform child in PassagesParent) {
-			possiblePassages.Add (child.name);
-		}
-		//remove LB and RB
-		possiblePassages.Remove("LB");
-		possiblePassages.Remove("RB");
-		possiblePassages.Remove("Esophagus");
-
 		//add random passages to list and dont add duplicates
 		StartCoroutine (AddPassagesRoutine ());
 	}
@@ -47,7 +36,7 @@ public class Level1Behavior : MonoBehaviour {
 		//before we loop through again.
 		for (int i = 0; i < numPassages; i++) {
 			int randIndex = UnityEngine.Random.Range(0,possiblePassages.Count);
-			Level1Passages.Add (possiblePassages [randIndex]);
+			Level1Passages.Add (possiblePassages [randIndex].name);
 			yield return possiblePassages.Remove(possiblePassages [randIndex]);
 		}
 		StartCoroutine (Level1Routine ());
@@ -90,13 +79,12 @@ public class Level1Behavior : MonoBehaviour {
 	}
 
 	public void LevelComplete(){
-
 		StartCoroutine (LevelCompleteRoutine ());
 	}
 
 	IEnumerator LevelCompleteRoutine(){
 		textLargeObject.SetActive(true);
-		objectiveTextLarge.text = "Level Complete!!";
+		objectiveTextLarge.text = "Level 1 Complete!!";
 		objectiveTextSmall.text = "";
 		yield return new WaitForSeconds (3f);
 		textLargeObject.SetActive(false);

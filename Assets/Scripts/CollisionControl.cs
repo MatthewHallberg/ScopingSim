@@ -20,6 +20,11 @@ public class CollisionControl : MonoBehaviour {
 				if (col.gameObject.name == Level1Behavior.Instance.desiredPassage) {
 					Level1Behavior.Instance.FoundPassage ();
 				}
+			//if level 2
+			} else if (LevelManager.Instance.currentLevel == LevelManager.Level.level2) {
+				if (col.gameObject.name == Level2Behavior.Instance.desiredPassage) {
+					Level2Behavior.Instance.FoundPassage ();
+				}
 			}
 		}
 	}

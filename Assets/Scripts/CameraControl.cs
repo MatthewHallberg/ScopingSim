@@ -45,8 +45,8 @@ public class CameraControl : MonoBehaviour {
 		
 		if (controlsEnabled) {
 			//handle forward backward movementand strafing
-			float vertical = Input.GetAxis ("Vertical") * 2f;
-			float horizontal = Input.GetAxis ("Horizontal") * 4f;
+			float vertical = Input.GetAxis ("Vertical") * 1f;
+			float horizontal = Input.GetAxis ("Horizontal") * 2f;
 
 			if (vertical != 0 || horizontal != 0) {
 				rb.AddRelativeForce (Vector3.forward * vertical);			
@@ -66,13 +66,23 @@ public class CameraControl : MonoBehaviour {
 			//rotY = Mathf.Clamp(rotY, -100, 100);
 
 			Quaternion localRotation = Quaternion.Euler (rotX, rotY, 0.0f);
-			transform.rotation = localRotation;
+			rb.transform.rotation = localRotation;
 		}
 	}
 
 	public void ResetCamera(){
 		transform.position = startPosition;
 		transform.rotation = startRotation;
+	}
+
+	public void EnableCameraControl(){
+
+		controlsEnabled = true;
+	}
+
+	public void DisableCameraControl(){
+
+		controlsEnabled = false;
 	}
 
 	public void ToggleCameraControl(){

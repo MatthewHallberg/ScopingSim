@@ -29,6 +29,17 @@ public class LevelManager : MonoBehaviour {
 		Level1Behavior.Instance.Init ();
 	}
 
+	public void StartLevel2(){
+		currentLevel = Level.level2;
+		anim.Play ();
+		Level2Behavior.Instance.Init ();
+	}
+
+	public void StartLevel3(){
+
+
+	}
+
 	public void LevelComplete(){
 		CameraControl.Instance.ResetCamera ();
 		CameraControl.Instance.ToggleCameraControl ();
