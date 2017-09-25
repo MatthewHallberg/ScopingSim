@@ -36,8 +36,9 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void StartLevel3(){
-
-
+		currentLevel = Level.level2;
+		anim.Play ();
+		Level3Behavior.Instance.Init ();
 	}
 
 	public void LevelComplete(){

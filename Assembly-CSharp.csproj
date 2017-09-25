@@ -53,9 +53,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BlackFadeBehavior.cs" />
      <Compile Include="Assets\Scripts\BubbleBehavior.cs" />
-     <Compile Include="Assets\Scripts\BubblePopBehavior.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\CollisionControl.cs" />
+     <Compile Include="Assets\Scripts\LesionBehavior.cs" />
      <Compile Include="Assets\Scripts\Level1Behavior.cs" />
      <Compile Include="Assets\Scripts\Level2Behavior.cs" />
      <Compile Include="Assets\Scripts\Level3Behavior.cs" />

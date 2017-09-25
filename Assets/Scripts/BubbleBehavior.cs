@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class BubbleBehavior : MonoBehaviour {
 
-	public GameObject bubblePopPrefab;
+	private bool shouldMove = false;
 
 	void OnTriggerEnter(Collider col){
+		if (col.gameObject.name.Contains ("Camera")) {
+			shouldMove = true;
+			Destroy (gameObject, 2f);
+		}
+	}
 
-		GameObject bubblePop = Instantiate (bubblePopPrefab, transform.parent);
-		bubblePop.transform.position = this.transform.position;
-		bubblePop.GetComponent<BubblePopBehavior> ().Init (transform.localScale.y);
-		Destroy (bubblePop, 2f);
-		transform.localScale = Vector3.zero;
-		Destroy (gameObject, 2f);
-		print ("HERE!");
+	void Update(){
+
+		if (shouldMove) {
+			//scale to nothing
+			transform.localScale = Vector3.Lerp (transform.localScale, Vector3.zero, Time.deltaTime * 10f);
+			//move toward camera so it doesnt look like its moving away
+			transform.position = Vector3.Lerp (transform.position, Camera.main.transform.position, Time.deltaTime * 10f);
+		}
 	}
 }
