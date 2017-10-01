@@ -59,15 +59,16 @@ public class Level1Behavior : MonoBehaviour {
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
 		objectiveTextSmall.text = "Get to the \n " + desiredPassage + "!";
+		TimerBehavior.Instance.RunTime ();
 	}
 
 	public void FoundPassage(){
+		TimerBehavior.Instance.StopTime ();
 		desiredPassage = "temp";
 		StartCoroutine (FoundPassageRoutine ());
 	}
 
 	IEnumerator FoundPassageRoutine(){
-
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Great job! \n You found it!";
 		objectiveTextSmall.text = "";

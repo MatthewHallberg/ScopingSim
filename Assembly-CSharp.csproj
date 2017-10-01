@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LungCollisionBehavior.cs" />
      <Compile Include="Assets\Scripts\SceneService.cs" />
+     <Compile Include="Assets\Scripts\TimerBehavior.cs" />
      <None Include="Assets\Fonts\GUI3D Text Shader.shader" />
      <None Include="Assets\Doctor&apos;s office\Readme.txt" />
  <Reference Include="UnityEngine.UI">
