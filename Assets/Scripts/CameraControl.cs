@@ -44,8 +44,8 @@ public class CameraControl : MonoBehaviour {
 	void FixedUpdate () {
 		
 		if (controlsEnabled) {
-			//handle forward backward movementand strafing
-			float vertical = Input.GetAxis ("Vertical") * 1f;
+			//handle forward backward movement and strafing
+			float vertical = Input.GetAxis ("Vertical") * .2f;
 			float horizontal = Input.GetAxis ("Horizontal") * 2f;
 
 			if (vertical != 0 || horizontal != 0) {

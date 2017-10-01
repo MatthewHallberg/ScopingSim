@@ -14,9 +14,10 @@ public class Level1Behavior : MonoBehaviour {
 
 	[Header("Level 1")]
 	public GameObject textLargeObject;
-	public Text objectiveTextLarge, objectiveTextSmall;
+	public Text objectiveTextLarge, objectiveTextSmall, scoreText;
 	public List<Transform> possiblePassages = new List<Transform> ();
 	private int numPassages = 2;
+	private int score = 0;
 	[HideInInspector]
 	public string desiredPassage;
 	[HideInInspector]
@@ -27,6 +28,8 @@ public class Level1Behavior : MonoBehaviour {
 	}
 
 	public void Init(){
+		score = 0;
+		scoreText.text = "Score: " + score;
 		//add random passages to list and dont add duplicates
 		StartCoroutine (AddPassagesRoutine ());
 	}
@@ -68,6 +71,8 @@ public class Level1Behavior : MonoBehaviour {
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Great job! \n You found it!";
 		objectiveTextSmall.text = "";
+		score++;
+		scoreText.text = "Score: " + score;
 
 		yield return new WaitForSeconds (3f);
 

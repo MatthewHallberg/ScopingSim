@@ -14,9 +14,10 @@ public class Level2Behavior : MonoBehaviour {
 
 	[Header("Level 2")]
 	public GameObject textLargeObject;
-	public Text objectiveTextLarge, objectiveTextSmall;
+	public Text objectiveTextLarge, objectiveTextSmall, scoreText;
 	public List<GameObject> labelsList = new List<GameObject> ();
 	private int numPassages = 2;
+	private int score = 0;
 	[HideInInspector]
 	public string desiredPassage;
 	[HideInInspector]
@@ -34,6 +35,8 @@ public class Level2Behavior : MonoBehaviour {
 	}
 
 	public void Init(){
+		score = 0;
+		scoreText.text = "Score: " + score;
 
 		//turn off all labels
 		foreach (GameObject go in labelsList) {
@@ -80,6 +83,8 @@ public class Level2Behavior : MonoBehaviour {
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Great job! \n You found it!";
 		objectiveTextSmall.text = "";
+		score++;
+		scoreText.text = "Score: " + score;
 
 		yield return new WaitForSeconds (3f);
 
