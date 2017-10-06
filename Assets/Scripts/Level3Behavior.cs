@@ -16,6 +16,8 @@ public class Level3Behavior : MonoBehaviour {
 	public Transform BubblesParent;
 	public GameObject textLargeObject;
 	public Text objectiveTextLarge, objectiveTextSmall;
+	public GameObject AnswerCanvas;
+	public Text choice1, choice2;
 
 	void Awake(){
 		_instance = this;
@@ -34,11 +36,11 @@ public class Level3Behavior : MonoBehaviour {
 		objectiveTextSmall.text = "";
 		//set objective text
 		textLargeObject.SetActive(true);
-		objectiveTextLarge.text = "Find The Lesion!";
+		objectiveTextLarge.text = "Find The Problem!";
 		yield return new WaitForSeconds (3f);
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
-		objectiveTextSmall.text = "Find The Lesion.";
+		objectiveTextSmall.text = "Find The Problem.";
 	}
 
 	public void FoundLesion(){
@@ -50,8 +52,12 @@ public class Level3Behavior : MonoBehaviour {
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Great job! \n You found it!";
 		objectiveTextSmall.text = "";
-		yield return new WaitForSeconds (3f);
-		LevelComplete ();
+		yield return new WaitForSeconds (2f);
+		textLargeObject.SetActive(false);
+		objectiveTextLarge.text = "";
+		AnswerCanvas.SetActive (true);
+		CameraControl.Instance.DisableCameraControl ();
+		//LevelComplete ();
 	}
 
 	public void LevelComplete(){
@@ -59,6 +65,7 @@ public class Level3Behavior : MonoBehaviour {
 	}
 
 	IEnumerator LevelCompleteRoutine(){
+		AnswerCanvas.SetActive (false);
 		BubblesParent.gameObject.SetActive (false);
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Level 3 Complete!!";
@@ -67,6 +74,19 @@ public class Level3Behavior : MonoBehaviour {
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
 		objectiveTextSmall.text = "";
+		CameraControl.Instance.EnableCameraControl ();
 		LevelManager.Instance.LevelComplete ();
+	}
+
+	public void SubmitChoice(){
+		
+		string answerType = choice1.text;
+		string answerLocation = choice2.text;
+
+		print (answerType);
+		print (answerLocation);
+
+		//HACK: not validating answer, level complete for now.
+		LevelComplete();
 	}
 }
