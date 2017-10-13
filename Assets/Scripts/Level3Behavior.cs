@@ -13,7 +13,6 @@ public class Level3Behavior : MonoBehaviour {
 	}
 
 	[Header("Level 3")]
-	public Transform BubblesParent;
 	public GameObject textLargeObject;
 	public Text objectiveTextLarge, objectiveTextSmall;
 	public GameObject AnswerCanvas;
@@ -21,7 +20,6 @@ public class Level3Behavior : MonoBehaviour {
 
 	void Awake(){
 		_instance = this;
-		BubblesParent.gameObject.SetActive (false);
 	}
 
 	public void Init(){
@@ -29,7 +27,6 @@ public class Level3Behavior : MonoBehaviour {
 	}
 
 	IEnumerator Level3Routine(){
-		BubblesParent.gameObject.SetActive (true);
 		//set defaults
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
@@ -66,7 +63,6 @@ public class Level3Behavior : MonoBehaviour {
 
 	IEnumerator LevelCompleteRoutine(){
 		AnswerCanvas.SetActive (false);
-		BubblesParent.gameObject.SetActive (false);
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Level 3 Complete!!";
 		objectiveTextSmall.text = "";

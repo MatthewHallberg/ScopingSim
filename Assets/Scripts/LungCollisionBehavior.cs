@@ -5,21 +5,19 @@ using UnityEngine.UI;
 
 public class LungCollisionBehavior : MonoBehaviour {
 
-	public Image BloodImage;
+	public ParticleSystem BubbleParticles;
+	public AudioSource coughAudioSource;
+
 	private Color startColor;
 	private int hitCount;
 
-	void Awake(){
-
-		startColor = BloodImage.color;
-		Color tempColor = startColor;
-		tempColor.a = 0;
-		BloodImage.color = tempColor;
-	}
+	private Vector3 desiredScale;
+	private Vector3 smallScale =  new Vector3 (10f, 20f, 20f);
+	private Vector3 normalScale = new Vector3 (20f, 20f, 20f);
+	private bool shouldAnimate = false;
 
 	void OnCollisionEnter(Collision col){
 
-		BloodFlash ();
 		hitCount++;
 
 		if (hitCount > CoughCount()) {
@@ -28,8 +26,17 @@ public class LungCollisionBehavior : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+
+		if (shouldAnimate) {
+			transform.parent.localScale = Vector3.Lerp (transform.parent.localScale, desiredScale, 4f * Time.deltaTime);
+		}
+	}
+
 	void Cough(){
-		BloodImage.GetComponent<AudioSource> ().Play ();
+		shouldAnimate = true;
+		desiredScale = smallScale;
+		coughAudioSource.Play ();
 		CameraControl.Instance.DisableCameraControl ();
 		CameraControl.Instance.rb.AddRelativeForce (Vector3.forward * -20f);
 		StartCoroutine (CoughRoutine ());
@@ -40,22 +47,10 @@ public class LungCollisionBehavior : MonoBehaviour {
 	}
 
 	IEnumerator CoughRoutine(){
-
 		yield return new WaitForSeconds (.5f);
+		BubbleParticles.Play ();
+		yield return new WaitForSeconds (1.5f);
+		desiredScale = normalScale;
 		CameraControl.Instance.EnableCameraControl ();
-	}
-
-	void BloodFlash(){
-
-		Color tempColor = startColor;
-		tempColor.a = 1;
-		BloodImage.color = tempColor;
-	}
-
-	void Update(){
-
-		Color tempColor = startColor;
-		tempColor.a = 0;
-		BloodImage.color = Color.Lerp (BloodImage.color, tempColor, Time.deltaTime * 1f);
 	}
 }
