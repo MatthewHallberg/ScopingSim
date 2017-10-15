@@ -45,6 +45,9 @@ public class LevelManager : MonoBehaviour {
 		CameraControl.Instance.ResetCamera ();
 		CameraControl.Instance.ToggleCameraControl ();
 		transform.localScale = Vector3.one;
-
+		//turn on all labels
+		foreach (GameObject go in Level2Behavior.Instance.labelsList) {
+			go.SetActive (true);
+		}
 	}
 }

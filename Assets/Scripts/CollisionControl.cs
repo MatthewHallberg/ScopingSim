@@ -5,17 +5,32 @@ using UnityEngine.UI;
 
 public class CollisionControl : MonoBehaviour {
 
+	private static CollisionControl _instance;
+	public static CollisionControl Instance {
+		get {
+			return _instance;
+		}
+	}
+
+	[HideInInspector]
+	public string currentPassage;
+
 	public Text locationText;
 	private Collider previousCollider;
+
+	void Awake(){
+		_instance = this;
+	}
 
 	void OnTriggerStay(Collider col){
 
 		if (previousCollider != col) {
 			previousCollider = col;
 
-			if (!col.gameObject.name.Contains ("Bubble")) {
+			if (!col.gameObject.name.Contains ("Bubble") && col.tag != "Tumor") {
 				//update location text
 				locationText.text = "Location: " + col.gameObject.name;
+				currentPassage = col.gameObject.name;
 			}
 
 			//if level 1

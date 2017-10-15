@@ -16,7 +16,14 @@ public class Level3Behavior : MonoBehaviour {
 	public GameObject textLargeObject;
 	public Text objectiveTextLarge, objectiveTextSmall;
 	public GameObject AnswerCanvas;
-	public Text choice1, choice2;
+	public Text choice1, choice2, scoreText;
+	private int numTumorsFound= 0;
+	public Transform SubmitButton;
+	private int score = 0;
+	public GameObject Passagelabel;
+
+	private string correctPassage;
+	private string correctTumor;
 
 	void Awake(){
 		_instance = this;
@@ -24,9 +31,19 @@ public class Level3Behavior : MonoBehaviour {
 
 	public void Init(){
 		StartCoroutine (Level3Routine ());
+		score = 0;
+		scoreText.text = "Score: " + score;
+		Passagelabel.SetActive (false);
+		//turn off all labels
+		foreach (GameObject go in Level2Behavior.Instance.labelsList) {
+			go.SetActive (false);
+		}
 	}
 
 	IEnumerator Level3Routine(){
+		TimerBehavior.Instance.RunTime ();
+		//generate random tumor and location
+		TumorLocationBehavior.Instance.PlaceRandomTumor();
 		//set defaults
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
@@ -40,12 +57,16 @@ public class Level3Behavior : MonoBehaviour {
 		objectiveTextSmall.text = "Find The Problem.";
 	}
 
-	public void FoundLesion(){
-		StartCoroutine (FoundPassageRoutine ());
+	public void FoundTumor(string type, string location){
+		correctTumor = type;
+		correctPassage = location;
+		StartCoroutine (FoundTumorRoutine ());
 	}
 
-	IEnumerator FoundPassageRoutine(){
-
+	IEnumerator FoundTumorRoutine(){
+		TimerBehavior.Instance.StopTime ();
+		score++;
+		scoreText.text = "Score: " + score;
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Great job! \n You found it!";
 		objectiveTextSmall.text = "";
@@ -54,7 +75,7 @@ public class Level3Behavior : MonoBehaviour {
 		objectiveTextLarge.text = "";
 		AnswerCanvas.SetActive (true);
 		CameraControl.Instance.DisableCameraControl ();
-		//LevelComplete ();
+		numTumorsFound++;
 	}
 
 	public void LevelComplete(){
@@ -70,6 +91,7 @@ public class Level3Behavior : MonoBehaviour {
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
 		objectiveTextSmall.text = "";
+		Passagelabel.SetActive (true);
 		CameraControl.Instance.EnableCameraControl ();
 		LevelManager.Instance.LevelComplete ();
 	}
@@ -79,10 +101,46 @@ public class Level3Behavior : MonoBehaviour {
 		string answerType = choice1.text;
 		string answerLocation = choice2.text;
 
-		print (answerType);
-		print (answerLocation);
+		bool gotTumor = false;
+		bool gotLocation = false;
 
-		//HACK: not validating answer, level complete for now.
-		LevelComplete();
+		if (answerType == correctTumor) {
+			gotTumor = true;
+		}
+
+		if (answerLocation == correctPassage) {
+			gotLocation = true;
+		}
+
+		if (gotTumor && gotLocation) {
+
+			StartCoroutine(CorrectlyIdentifiedRoutine());
+
+		} else {
+			SubmitButton.GetChild (0).GetComponent<Text> ().text = "Try Again";
+		}
+	}
+
+	IEnumerator CorrectlyIdentifiedRoutine(){
+
+		TumorLocationBehavior.Instance.DestroyTumor ();
+		AnswerCanvas.SetActive (false);
+
+		textLargeObject.SetActive(false);
+		objectiveTextLarge.text = "";
+		objectiveTextSmall.text = "";
+		//set objective text
+		textLargeObject.SetActive(true);
+		objectiveTextLarge.text = "That's Correct!";
+
+		yield return new WaitForSeconds (3f);
+
+		if (numTumorsFound > 2) {
+			LevelComplete ();
+		} else {
+			CameraControl.Instance.ResetCamera ();
+			CameraControl.Instance.ToggleCameraControl ();
+			StartCoroutine (Level3Routine ());
+		}
 	}
 }
