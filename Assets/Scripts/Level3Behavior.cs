@@ -16,7 +16,7 @@ public class Level3Behavior : MonoBehaviour {
 	public GameObject textLargeObject;
 	public Text objectiveTextLarge, objectiveTextSmall;
 	public GameObject AnswerCanvas;
-	public Text choice1, choice2, scoreText;
+	public Text choice1, choice2, scoreText, inputText;
 	private int numTumorsFound= 0;
 	public Transform SubmitButton;
 	private int score = 0;
@@ -100,9 +100,11 @@ public class Level3Behavior : MonoBehaviour {
 		
 		string answerType = choice1.text;
 		string answerLocation = choice2.text;
+		string answerText = inputText.text;
 
 		bool gotTumor = false;
 		bool gotLocation = false;
+		bool gotInput = false;
 
 		if (answerType == correctTumor) {
 			gotTumor = true;
@@ -112,9 +114,17 @@ public class Level3Behavior : MonoBehaviour {
 			gotLocation = true;
 		}
 
-		if (gotTumor && gotLocation) {
+		if (answerText.Length > 0) {
+			gotInput = true;
+		}
+
+		if (gotTumor && gotLocation && gotInput) {
 
 			StartCoroutine(CorrectlyIdentifiedRoutine());
+
+			print ("TUMOR TYPE: " + answerType);
+			print ("TUMOR LOCATION: " + answerLocation);
+			print ("TEXT INPUT: " + answerText);
 
 		} else {
 			SubmitButton.GetChild (0).GetComponent<Text> ().text = "Try Again";
