@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Level1Behavior.cs" />
      <Compile Include="Assets\Scripts\Level2Behavior.cs" />
      <Compile Include="Assets\Scripts\Level3Behavior.cs" />
+     <Compile Include="Assets\Scripts\Level4Behavior.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LocationOptions.cs" />
      <Compile Include="Assets\Scripts\LungCollisionBehavior.cs" />

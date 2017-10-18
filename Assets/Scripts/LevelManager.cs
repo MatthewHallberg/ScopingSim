@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour {
 	public Animation anim;
 
 	[HideInInspector]
-	public enum Level{level1,level2,level3,none};
+	public enum Level{level1,level2,level3,level4,none};
 	[HideInInspector]
 	public Level currentLevel;
 
@@ -36,9 +36,15 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void StartLevel3(){
-		currentLevel = Level.level2;
+		currentLevel = Level.level3;
 		anim.Play ();
 		Level3Behavior.Instance.Init ();
+	}
+
+	public void StartLevel4(){
+		currentLevel = Level.level4;
+		anim.Play ();
+		Level4Behavior.Instance.Init ();
 	}
 
 	public void LevelComplete(){
