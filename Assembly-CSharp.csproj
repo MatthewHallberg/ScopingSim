@@ -63,11 +63,14 @@
      <Compile Include="Assets\Scripts\LocationOptions.cs" />
      <Compile Include="Assets\Scripts\LungCollisionBehavior.cs" />
      <Compile Include="Assets\Scripts\SceneService.cs" />
+     <Compile Include="Assets\Scripts\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\TimerBehavior.cs" />
      <Compile Include="Assets\Scripts\TumorBehavior.cs" />
      <Compile Include="Assets\Scripts\TumorLocationBehavior.cs" />
      <None Include="Assets\Fonts\GUI3D Text Shader.shader" />
+     <None Include="Assets\Scripts\DepthMask.shader" />
      <None Include="Assets\Doctor&apos;s office\Readme.txt" />
+     <None Include="Assets\Scripts\Water Flow FREE Simple.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity2017/Unity2017.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -21,6 +21,8 @@ public class Level4Behavior : MonoBehaviour {
 	public Transform SubmitButton;
 	private int score = 0;
 	public GameObject Passagelabel;
+	[Header("Blood Stuff")]
+	public GameObject BloodParent;
 
 	private string correctPassage;
 
@@ -40,6 +42,7 @@ public class Level4Behavior : MonoBehaviour {
 	}
 
 	IEnumerator Level4Routine(){
+		BloodParent.SetActive (true);
 		TimerBehavior.Instance.RunTime ();
 		//generate random tumor and location
 		TumorLocationBehavior.Instance.PlaceRandomTumor();
