@@ -52,11 +52,11 @@ public class Level4Behavior : MonoBehaviour {
 		objectiveTextSmall.text = "";
 		//set objective text
 		textLargeObject.SetActive(true);
-		objectiveTextLarge.text = "Find The Problem!";
+		objectiveTextLarge.text = "Find The Bleed Source!";
 		yield return new WaitForSeconds (3f);
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
-		objectiveTextSmall.text = "Find The Problem.";
+		objectiveTextSmall.text = "Find The Bleed Source!";
 	}
 
 	public void FoundLesion( string location){
