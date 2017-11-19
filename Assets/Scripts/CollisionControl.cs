@@ -43,6 +43,11 @@ public class CollisionControl : MonoBehaviour {
 				if (col.gameObject.name == Level2Behavior.Instance.desiredPassage) {
 					Level2Behavior.Instance.FoundPassage ();
 				}
+			//if level 4
+			} else if (LevelManager.Instance.currentLevel == LevelManager.Level.level4) {
+				if (col.gameObject.name == Level4Behavior.Instance.desiredPassage) {
+					Level4Behavior.Instance.FoundPassage ();
+				}
 			}
 		}
 	}

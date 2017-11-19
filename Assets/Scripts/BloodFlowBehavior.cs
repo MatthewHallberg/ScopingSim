@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BloodFlowBehavior : MonoBehaviour {
 
-	// Use this for initialization
-	void OnEnable () {
+	public void EnableBlood(){
 		StartCoroutine (BloodFlowRoutine ());
 	}
 

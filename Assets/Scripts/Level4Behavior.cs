@@ -17,12 +17,26 @@ public class Level4Behavior : MonoBehaviour {
 	public Text objectiveTextLarge, objectiveTextSmall;
 	public GameObject AnswerCanvas;
 	public Text chosenLocation, scoreText;
-	private int numLesionsFound= 0;
 	public Transform SubmitButton;
 	private int score = 0;
 	public GameObject Passagelabel;
+	[HideInInspector]
+	public string desiredPassage;
+
 	[Header("Blood Stuff")]
 	public GameObject BloodParent;
+
+	[System.Serializable]
+	public class BloodFlow
+	{
+		public List<GameObject> bloodParticles = new List <GameObject> ();
+	}
+
+	/*List of a list of blood particles, each element is one flow made up of multiple particle systems
+	 * the last gameobject in the inner list contains the name of the correct passage
+	 * that the blood flow originated from.
+	 */
+	public List<BloodFlow> bloodStreams = new List <BloodFlow> ();
 
 	private string correctPassage;
 
@@ -42,29 +56,48 @@ public class Level4Behavior : MonoBehaviour {
 	}
 
 	IEnumerator Level4Routine(){
+
 		BloodParent.SetActive (true);
+		//turn off all blood particles in case they are left on
+		foreach(Transform child in BloodParent.transform){
+			child.gameObject.SetActive (false);
+		}
+
+		//turn on all gameobjects in desired blood stream
+		foreach (GameObject childGo in bloodStreams[0].bloodParticles) {
+			childGo.SetActive (true);
+		}
+		BloodParent.GetComponent<BloodFlowBehavior> ().EnableBlood ();
+		yield return new WaitForSeconds (.1f);
+
+		//set desired passage from last gameobject in list
+		desiredPassage = bloodStreams[0].bloodParticles[bloodStreams[0].bloodParticles.Count-1].name;
+		correctPassage = desiredPassage;
+
+		//remove this blood stream from list now that its been used
+		bloodStreams.RemoveAt (0);
+
 		TimerBehavior.Instance.RunTime ();
-		//generate random tumor and location
-		TumorLocationBehavior.Instance.PlaceRandomTumor();
 		//set defaults
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
 		objectiveTextSmall.text = "";
 		//set objective text
 		textLargeObject.SetActive(true);
-		objectiveTextLarge.text = "Find The Bleed Source!";
+		objectiveTextLarge.text = "Find The \nBleed Source!";
 		yield return new WaitForSeconds (3f);
 		textLargeObject.SetActive(false);
 		objectiveTextLarge.text = "";
 		objectiveTextSmall.text = "Find The Bleed Source!";
 	}
 
-	public void FoundLesion( string location){
-		correctPassage = location;
-		StartCoroutine (FoundLesionRoutine ());
+	public void FoundPassage(){
+		TimerBehavior.Instance.StopTime ();
+		desiredPassage = "temp";
+		StartCoroutine (FoundBloodSourceRoutine ());
 	}
 
-	IEnumerator FoundLesionRoutine(){
+	IEnumerator FoundBloodSourceRoutine(){
 		TimerBehavior.Instance.StopTime ();
 		score++;
 		scoreText.text = "Score: " + score;
@@ -76,7 +109,6 @@ public class Level4Behavior : MonoBehaviour {
 		objectiveTextLarge.text = "";
 		AnswerCanvas.SetActive (true);
 		CameraControl.Instance.DisableCameraControl ();
-		numLesionsFound++;
 	}
 
 	public void LevelComplete(){
@@ -84,6 +116,7 @@ public class Level4Behavior : MonoBehaviour {
 	}
 
 	IEnumerator LevelCompleteRoutine(){
+		BloodParent.SetActive (false);
 		AnswerCanvas.SetActive (false);
 		textLargeObject.SetActive(true);
 		objectiveTextLarge.text = "Level 4 Complete!!";
@@ -108,11 +141,8 @@ public class Level4Behavior : MonoBehaviour {
 		}
 
 		if (gotLocation) {
-
 			StartCoroutine(CorrectlyIdentifiedRoutine());
-
 			print ("TUMOR LOCATION: " + answerLocation);
-
 		} else {
 			SubmitButton.GetChild (0).GetComponent<Text> ().text = "Try Again";
 		}
@@ -131,7 +161,7 @@ public class Level4Behavior : MonoBehaviour {
 
 		yield return new WaitForSeconds (3f);
 
-		if (numLesionsFound > 2) {
+		if (bloodStreams.Count < 1) {
 			LevelComplete ();
 		} else {
 			CameraControl.Instance.ResetCamera ();
