@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class TumorLocationBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// This script handles placing tumors for level 3.
+	/// Tumors are placed based on predetermined locations
+	/// because the tumors are 2D and need to have a specific size, location,
+	/// and rotation to look half way decent. 
+	/// This script goes on the parent transform of all these locations. All the  
+	/// locations are the children of this transform (they are just empty gameobjects
+	/// that we can instantiate tumors and make them children) so the tumors then inherit the correct
+	/// rotation, location, and scale of their parent. 
+	/// </summary>
+
 	private static TumorLocationBehavior _instance;
 	public static TumorLocationBehavior Instance {
 		get {

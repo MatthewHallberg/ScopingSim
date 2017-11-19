@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class LungCollisionBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// This script goes on each part of the lungs and 
+	/// detects collisions for playing the cough animation.
+	/// </summary>
+
 	public ParticleSystem BubbleParticles;
 	public AudioSource coughAudioSource;
 

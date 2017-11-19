@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class CollisionControl : MonoBehaviour {
 
+	/// <summary>
+	/// This is housed on the main camera and handles detecting collisions with desired 
+	/// passages on all the different levels. This is also where the camera's current
+	/// location is set in the heads up display, the current passage can also be accessed 
+	/// from this script if you need to know the current location of the camera 
+	/// (or last known location) at ny point. 
+	/// </summary>
+
 	private static CollisionControl _instance;
 	public static CollisionControl Instance {
 		get {

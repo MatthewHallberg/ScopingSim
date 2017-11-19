@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class TimerBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// Singleton instance of the class allows us to start and stop time from anywhere.
+	/// </summary>
+
 	private static TimerBehavior _instance;
 	public static TimerBehavior Instance {
 		get {
@@ -39,7 +43,6 @@ public class TimerBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (runTimer) {
 			float timeTaken = -timeSinceAppStart + Time.time;
 			FormatTime (timeTaken);
@@ -47,13 +50,11 @@ public class TimerBehavior : MonoBehaviour {
 	}
 
 	public void RunTime(){
-
 		timeSinceAppStart = Time.time;
 		runTimer = true;
 	}
 
 	public void StopTime(){
-
 		runTimer = false;
 	}
 }

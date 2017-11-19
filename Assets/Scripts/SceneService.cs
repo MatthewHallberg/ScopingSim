@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneService : MonoBehaviour {
 
+	/// <summary>
+	/// This handles switching of scenes, this instance persists
+	/// between scene loads so it can be called at any time and 
+	/// does not die. 
+	/// </summary>
+
 	public static SceneService instance;
 
 	//dont destroy this instance 

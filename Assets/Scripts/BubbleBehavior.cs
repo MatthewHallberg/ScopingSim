@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BubbleBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// This causes bubbles to explode when the camera hits them, 
+	/// not currently being used but left it here just in case. 
+	/// </summary>
+
 	private bool shouldMove = false;
 
 	void OnTriggerEnter(Collider col){

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class BloodFlowBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// This gets called every time blood particles are activated because
+	/// the flow needs to be simulated at a high speed for single frame
+	/// in order to cover its desired distance. We do this becaue we want the flows to 
+	/// take up space but also move slowly. 
+	/// </summary>
+
 	public void EnableBlood(){
 		StartCoroutine (BloodFlowRoutine ());
 	}

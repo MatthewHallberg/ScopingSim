@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
+	/// <summary>
+	/// This sets the current level enum and also handles resetting the camera 
+	/// to the origin position in the esophagus and resets the
+	/// heads up display when each level is complete. These functions are called when their respective
+	/// level buttons are pressed on the main canvas. The onclick listeners were added to each button.
+	/// </summary>
+
 	private static LevelManager _instance;
 	public static LevelManager Instance {
 		get {

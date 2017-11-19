@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class TumorBehavior : MonoBehaviour {
 
+	/// <summary>
+	/// This script handles Tumor collisions for Level 3, because level 3 
+	/// is the only level where collisions are not based on a specific passage. 
+	/// </summary>
+
 	private bool lesionFound = false;
 	private string tumorLocation;
 	private bool foundLocation = false;
